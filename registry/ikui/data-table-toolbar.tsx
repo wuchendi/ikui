@@ -1,6 +1,7 @@
 'use client'
 
 import type { Column, ReactTable, RowData } from '@tanstack/react-table'
+import { cn } from 'cn'
 import { X as Cross2Icon } from 'lucide-react'
 import * as React from 'react'
 import { DataTableDateFilter } from '@/components/data-table-date-filter'
@@ -16,7 +17,6 @@ import {
   InputGroupText,
 } from '@/components/ui/input-group'
 import type { DataTableFeatures } from '@/lib/data-table-utils'
-import { cn } from '@/lib/utils'
 
 interface DataTableToolbarProps<TData extends RowData>
   extends React.ComponentProps<'div'> {

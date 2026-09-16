@@ -66,7 +66,7 @@ Path aliases (`tsconfig.json`): `@/*` → `src/*` and repo root; `@/docs/*` → 
 - Only `src/components/ui/**/*.tsx` is **excluded from Biome** (see `biome.json`) —
   those follow upstream shadcn/Base UI formatting; match it, don't reformat.
   `registry/ikui/**` **is** linted and formatted like the rest of the repo.
-- Use `cn()` from `@/lib/utils` for class merging.
+- Use `cn()` from the `cn` package for class merging (declare `cn` in the registry item's `dependencies`).
 - Registry components should be self-contained and copy-pasteable: minimal deps,
   declare every external dep in the registry item's `dependencies` /
   `registryDependencies`.

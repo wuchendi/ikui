@@ -1,7 +1,7 @@
 'use client'
 
+import { cn } from 'cn'
 import { useState } from 'react'
-import { cn } from '@/lib/utils'
 import { ImageGrid } from '@/registry/ikui/image-grid'
 
 const images = Array.from({ length: 9 }, (_, i) => ({

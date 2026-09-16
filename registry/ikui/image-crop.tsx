@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from 'cn'
 import type {
   CSSProperties,
   HTMLAttributes,
@@ -8,7 +9,6 @@ import type {
   ReactNode,
 } from 'react'
 import { useEffect, useId, useRef, useState } from 'react'
-import { cn } from '@/lib/utils'
 
 export type Ords = 'n' | 's' | 'e' | 'w' | 'nw' | 'ne' | 'se' | 'sw'
 

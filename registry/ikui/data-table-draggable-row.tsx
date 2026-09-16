@@ -3,10 +3,10 @@ import { CSS } from '@dnd-kit/utilities'
 import type { Row, RowData } from '@tanstack/react-table'
 import { FlexRender } from '@tanstack/react-table'
 import type { VirtualItem, Virtualizer } from '@tanstack/react-virtual'
+import { cn } from 'cn'
 import { TableCell, TableRow } from '@/components/ui/table'
 import type { DataTableFeatures } from '@/lib/data-table-utils'
 import { getCommonPinningStyles } from '@/lib/data-table-utils'
-import { cn } from '@/lib/utils'
 
 interface DraggableRowProps<TData extends RowData> {
   row: Row<DataTableFeatures, TData>

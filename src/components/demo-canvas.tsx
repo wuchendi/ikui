@@ -1,12 +1,12 @@
 'use client'
 
+import { cn } from 'cn'
 import { Loader2 } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import type { ReactNode } from 'react'
 import { Suspense, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { cn } from '@/lib/utils'
 import RefreshAnticlockwise from './icons/refresh'
 import { OpenInV0Button } from './open-in-v0-button'
 

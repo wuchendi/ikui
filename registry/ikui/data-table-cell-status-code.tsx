@@ -1,6 +1,6 @@
+import { cn } from 'cn'
 import { Badge } from '@/components/ui/badge'
 import { getStatusColor } from '@/lib/data-table-cell-utils'
-import { cn } from '@/lib/utils'
 
 export function DataTableCellStatusCode({
   value,

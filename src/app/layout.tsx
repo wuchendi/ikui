@@ -1,8 +1,9 @@
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { cn } from 'cn'
 import type { Metadata, Viewport } from 'next'
 import { DynaPuff, Geist, Geist_Mono, Instrument_Serif } from 'next/font/google'
 import { siteConfig } from '@/lib/config'
-import { cn, constructMetadata } from '@/lib/utils'
+import { constructMetadata } from '@/lib/utils'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 

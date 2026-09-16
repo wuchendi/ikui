@@ -1,9 +1,9 @@
 'use client'
 
+import { cn } from 'cn'
 import { Check, Loader2, RefreshCw } from 'lucide-react'
 import QRCodeLib from 'qrcode'
 import * as React from 'react'
-import { cn } from '@/lib/utils'
 
 type IconSize = number | { width: number; height: number }
 

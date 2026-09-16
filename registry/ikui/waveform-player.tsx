@@ -1,10 +1,10 @@
 'use client'
 
+import { cn } from 'cn'
 import { Pause, Play } from 'lucide-react'
 import * as React from 'react'
 import { AudioWaveform } from '@/components/audio-waveform'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
 
 interface WaveformPlayerProps {
   /**

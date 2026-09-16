@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from 'cn'
 import { Check, ChevronDown, ChevronRight, X } from 'lucide-react'
 import * as React from 'react'
 import { Button } from '@/components/ui/button'
@@ -16,7 +17,6 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { useIsMobile } from '@/hooks/use-mobile'
-import { cn } from '@/lib/utils'
 
 export interface CascaderOption {
   value: string

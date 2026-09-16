@@ -1,11 +1,11 @@
 'use client'
 
+import { cn } from 'cn'
 import { SquarePen } from 'lucide-react'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { useEffect, useMemo, useState } from 'react'
 import { siteConfig } from '@/lib/config'
-import { cn } from '@/lib/utils'
 import MenuLeft from './icons/menu-left'
 import { TelegramIcon } from './icons/telegram'
 import { XIcon } from './icons/x'

@@ -1,12 +1,5 @@
-import type { ClassValue } from 'clsx'
-import { clsx } from 'clsx'
 import type { Metadata } from 'next'
-import { twMerge } from 'tailwind-merge'
 import { getBaseUrl, siteConfig } from '@/lib/config'
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
 
 export function absoluteUrl(path: string) {
   const base = getBaseUrl()

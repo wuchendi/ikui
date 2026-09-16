@@ -1,7 +1,7 @@
 'use client'
 
+import { cn } from 'cn'
 import * as React from 'react'
-import { cn } from '@/lib/utils'
 
 // The line and fill are drawn in this fixed coordinate space and scaled to the
 // container through the SVG viewBox. The interactive overlays (cursor, dot,
