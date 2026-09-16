@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from 'cn'
 import {
   endOfMonth,
   endOfWeek,
@@ -22,7 +23,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { cn } from '@/lib/utils'
 
 export interface DateRangePreset {
   label: string

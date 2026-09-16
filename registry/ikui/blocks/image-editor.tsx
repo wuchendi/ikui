@@ -14,6 +14,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { cn } from 'cn'
 // Types only — the runtime module is loaded lazily in an effect so this client
 // component never imports fabric (a browser-only library) during SSR/prerender.
 import type { Canvas, FabricImage, FabricObject } from 'fabric'
@@ -113,7 +114,6 @@ import {
 } from '@/components/ui/select'
 import { Slider } from '@/components/ui/slider'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { cn } from '@/lib/utils'
 
 type FabricModule = typeof import('fabric')
 

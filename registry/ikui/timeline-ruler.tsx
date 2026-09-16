@@ -1,7 +1,7 @@
 'use client'
 
+import { cn } from 'cn'
 import * as React from 'react'
-import { cn } from '@/lib/utils'
 
 const DEFAULT_PIXELS_PER_SECOND = 50
 const DEFAULT_FPS = 30

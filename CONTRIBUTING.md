@@ -55,7 +55,7 @@ Create the main component in `registry/ikui/example-component.tsx`
 
 ```typescript
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "cn";
 
 export default function ExampleComponent({
   className,
@@ -208,7 +208,7 @@ import { Demo as DemoSizes } from "./demo-sizes";
 - Follow existing patterns in `registry/ikui/`
 - Use Tailwind CSS for styling
 - Prefer `motion` (Framer Motion) for animations
-- Use `cn()` from `@/lib/utils` for class merging
+- Use `cn()` from the `cn` package for class merging
 
 ## Ask for Help
 

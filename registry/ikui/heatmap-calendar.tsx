@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from 'cn'
 import {
   addDays,
   differenceInCalendarDays,
@@ -15,7 +16,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { cn } from '@/lib/utils'
 
 export type HeatmapDatum = {
   date: string | Date

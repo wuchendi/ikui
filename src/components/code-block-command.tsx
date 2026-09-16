@@ -1,10 +1,10 @@
 'use client'
 
+import { cn } from 'cn'
 import { Terminal } from 'lucide-react'
 import { useMemo } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useConfig } from '@/hooks/use-config'
-import { cn } from '@/lib/utils'
 import { CopyButton } from '@/registry/ikui/copy-button'
 
 interface CodeBlockCommandProps {

@@ -1,10 +1,9 @@
 import type { VariantProps } from 'class-variance-authority'
 import { cva } from 'class-variance-authority'
+import { cn } from 'cn'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import { Children, cloneElement } from 'react'
 import { Slot } from '@/lib/slot'
-
-import { cn } from '@/lib/utils'
 
 const shinyButtonKeyframes = `@keyframes shiny-button-shine{0%{left:-110%}60%,100%{left:120%}}`
 

@@ -1,8 +1,8 @@
 'use client'
 
+import { cn } from 'cn'
 import * as React from 'react'
 import { ThumbnailStrip } from '@/components/thumbnail-strip'
-import { cn } from '@/lib/utils'
 import type { VideoThumbnailCache } from '@/lib/video-thumbnail-cache'
 
 const DEFAULT_HEIGHT = 64

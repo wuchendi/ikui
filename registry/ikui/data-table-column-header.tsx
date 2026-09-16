@@ -1,6 +1,7 @@
 'use client'
 
 import type { Column, RowData } from '@tanstack/react-table'
+import { cn } from 'cn'
 import {
   ChevronsUpDown as CaretSortIcon,
   ChevronDown as ChevronDownIcon,
@@ -16,7 +17,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import type { DataTableFeatures } from '@/lib/data-table-utils'
-import { cn } from '@/lib/utils'
 
 interface DataTableColumnHeaderProps<TData extends RowData, TValue>
   extends React.ComponentProps<typeof DropdownMenuTrigger> {

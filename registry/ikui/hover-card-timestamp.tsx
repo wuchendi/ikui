@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from 'cn'
 import { format, formatDistanceToNowStrict } from 'date-fns'
 import { Check, Copy } from 'lucide-react'
 import type { ComponentPropsWithoutRef } from 'react'
@@ -9,7 +10,6 @@ import {
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
-import { cn } from '@/lib/utils'
 
 type HoverCardContentProps = ComponentPropsWithoutRef<typeof HoverCardContent>
 

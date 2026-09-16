@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from 'cn'
 import { X } from 'lucide-react'
 import * as React from 'react'
 import { createPortal } from 'react-dom'
@@ -13,7 +14,6 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import { WaveformPlayer } from '@/components/waveform-player'
-import { cn } from '@/lib/utils'
 
 const ANIMATION_MS = 200
 

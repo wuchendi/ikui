@@ -15,6 +15,7 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import type { ReactTable, RowData } from '@tanstack/react-table'
 import { FlexRender } from '@tanstack/react-table'
 import { useVirtualizer } from '@tanstack/react-virtual'
+import { cn } from 'cn'
 import * as React from 'react'
 import { DataTableDraggableRow } from '@/components/data-table-draggable-row'
 import { DataTablePagination } from '@/components/data-table-pagination'
@@ -28,7 +29,6 @@ import {
 } from '@/components/ui/table'
 import type { DataTableFeatures } from '@/lib/data-table-utils'
 import { getCommonPinningStyles } from '@/lib/data-table-utils'
-import { cn } from '@/lib/utils'
 
 interface DataTableProps<TData extends RowData>
   extends Omit<React.ComponentProps<'div'>, 'onDragEnd'> {

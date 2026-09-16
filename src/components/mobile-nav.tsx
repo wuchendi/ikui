@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from 'cn'
 import type { LinkProps } from 'next/link'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
@@ -8,7 +9,6 @@ import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Button } from '@/components/ui/button'
 import type { DocSchema } from '@/lib/types'
-import { cn } from '@/lib/utils'
 
 export function MobileNav({
   docSchema,

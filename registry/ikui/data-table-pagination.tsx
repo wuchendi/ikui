@@ -1,4 +1,5 @@
 import type { ReactTable, RowData } from '@tanstack/react-table'
+import { cn } from 'cn'
 import {
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
@@ -15,7 +16,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import type { DataTableFeatures } from '@/lib/data-table-utils'
-import { cn } from '@/lib/utils'
 
 interface DataTablePaginationProps<TData extends RowData>
   extends React.ComponentProps<'div'> {

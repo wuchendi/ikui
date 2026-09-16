@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from 'cn'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { HTMLAttributes, ReactNode, RefObject } from 'react'
 import {
@@ -10,7 +11,6 @@ import {
   useRef,
   useState,
 } from 'react'
-import { cn } from '@/lib/utils'
 
 export interface ImageCompareProps extends HTMLAttributes<HTMLDivElement> {
   aspectRatio?: 'taller' | 'wider'

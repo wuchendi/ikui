@@ -1,6 +1,7 @@
 'use client'
 
 import type { ReactTable, RowData } from '@tanstack/react-table'
+import { cn } from 'cn'
 import {
   ChevronsUpDown as CaretSortIcon,
   Check as CheckIcon,
@@ -23,7 +24,6 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import type { DataTableFeatures } from '@/lib/data-table-utils'
-import { cn } from '@/lib/utils'
 
 interface DataTableViewOptionsProps<TData extends RowData> {
   table: ReactTable<DataTableFeatures, TData>
