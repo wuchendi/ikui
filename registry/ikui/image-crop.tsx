@@ -351,10 +351,43 @@ function nudgeCrop(
 // ---------------------------------------------------------------------------
 
 interface Rect {
+  /** Left edge in CLIENT (screen) pixels — where pointer events report. */
   x: number
+  /** Top edge in CLIENT (screen) pixels. */
   y: number
+  /** Width in LAYOUT pixels — the space crop values live in. */
   width: number
+  /** Height in LAYOUT pixels. */
   height: number
+  /** Client pixels per layout pixel, from any scaled ancestor. */
+  scaleX: number
+  scaleY: number
+}
+
+/**
+ * A client coordinate expressed in the media's own layout pixels.
+ *
+ * Pointer events report SCREEN pixels, while crop values and the selection's
+ * own `left`/`width` style are LAYOUT pixels. The two are the same number only
+ * when no ancestor is scaled — and this component is used inside a canvas that
+ * zooms the whole flow with one CSS transform, where mixing them shrinks the
+ * crop by the zoom factor and drags it toward the origin.
+ */
+function toLocalX(box: Rect, clientX: number): number {
+  return (clientX - box.x) / box.scaleX
+}
+
+function toLocalY(box: Rect, clientY: number): number {
+  return (clientY - box.y) / box.scaleY
+}
+
+/** A client-space distance in the media's own layout pixels. */
+function toLocalDistanceX(box: Rect, distance: number): number {
+  return distance / box.scaleX
+}
+
+function toLocalDistanceY(box: Rect, distance: number): number {
+  return distance / box.scaleY
 }
 
 interface DragData {
@@ -529,10 +562,21 @@ export function ImageCrop(props: ImageCropProps) {
   function getBox(): Rect {
     const el = mediaRef.current
     if (!el) {
-      return { x: 0, y: 0, width: 0, height: 0 }
+      return { x: 0, y: 0, width: 0, height: 0, scaleX: 1, scaleY: 1 }
     }
-    const { x, y, width, height } = el.getBoundingClientRect()
-    return { x, y, width, height }
+    const rect = el.getBoundingClientRect()
+    // `offsetWidth` is the layout size, the client rect is the painted one;
+    // their ratio IS the accumulated scale of every transformed ancestor.
+    const scaleX = el.offsetWidth > 0 ? rect.width / el.offsetWidth : 1
+    const scaleY = el.offsetHeight > 0 ? rect.height / el.offsetHeight : 1
+    return {
+      x: rect.x,
+      y: rect.y,
+      width: el.offsetWidth,
+      height: el.offsetHeight,
+      scaleX,
+      scaleY,
+    }
   }
 
   function makePixelCrop(box: Rect) {
@@ -576,8 +620,8 @@ export function ImageCrop(props: ImageCropProps) {
 
     // Anchor the drag to the opposite corner of the one being resized.
     if (ord) {
-      const relativeX = e.clientX - box.x
-      const relativeY = e.clientY - box.y
+      const relativeX = toLocalX(box, e.clientX)
+      const relativeY = toLocalY(box, e.clientY)
       let fromCornerX = 0
       let fromCornerY = 0
 
@@ -631,8 +675,8 @@ export function ImageCrop(props: ImageCropProps) {
     capture(e)
     componentRef.current?.focus({ preventScroll: true })
 
-    const cropX = e.clientX - box.x
-    const cropY = e.clientY - box.y
+    const cropX = toLocalX(box, e.clientX)
+    const cropY = toLocalY(box, e.clientY)
     const nextCrop: PixelCrop = {
       unit: 'px',
       x: cropX,
@@ -712,8 +756,8 @@ export function ImageCrop(props: ImageCropProps) {
   function dragCrop(box: Rect) {
     const data = dragData.current
     const nextCrop = makePixelCrop(box)
-    const xDiff = data.clientX - data.startClientX
-    const yDiff = data.clientY - data.startClientY
+    const xDiff = toLocalDistanceX(box, data.clientX - data.startClientX)
+    const yDiff = toLocalDistanceY(box, data.clientY - data.startClientY)
 
     nextCrop.x = clamp(data.startCropX + xDiff, 0, box.width - nextCrop.width)
     nextCrop.y = clamp(data.startCropY + yDiff, 0, box.height - nextCrop.height)
@@ -728,8 +772,8 @@ export function ImageCrop(props: ImageCropProps) {
     minH: number,
   ): Ords {
     const data = dragData.current
-    const relativeX = data.clientX - box.x
-    const relativeY = data.clientY - box.y
+    const relativeX = toLocalX(box, data.clientX)
+    const relativeY = toLocalY(box, data.clientY)
 
     const topHalf =
       minH && origOrd
@@ -765,8 +809,8 @@ export function ImageCrop(props: ImageCropProps) {
     let nextCrop = makePixelCrop(box)
     const area = getPointRegion(box, data.ord, minW, minH)
     const ord = data.ord ?? area
-    let xDiff = data.clientX - data.startClientX
-    let yDiff = data.clientY - data.startClientY
+    let xDiff = toLocalDistanceX(box, data.clientX - data.startClientX)
+    let yDiff = toLocalDistanceY(box, data.clientY - data.startClientY)
 
     // With min dimensions set, stop the crop being dragged past the far side.
     if ((minW && ord === 'nw') || ord === 'w' || ord === 'sw') {
