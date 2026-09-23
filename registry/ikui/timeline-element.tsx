@@ -128,6 +128,21 @@ export function TimelineElement({
     origin: TimelineElementResize
   } | null>(null)
 
+  /**
+   * Screen pixels per layout pixel, from every transformed ancestor combined.
+   *
+   * The painted width over the laid-out width IS that factor, and reading it
+   * at the start of each move keeps a drag correct even if the page zooms
+   * mid-gesture. Falls back to 1 whenever the element has no width to divide
+   * by — an unmounted root, or a clip of zero duration.
+   */
+  const elementScale = () => {
+    const el = rootRef.current
+    if (!el || el.offsetWidth <= 0) return 1
+    const painted = el.getBoundingClientRect().width
+    return painted > 0 ? painted / el.offsetWidth : 1
+  }
+
   // Pointer-move/up are handled locally on the root and only matter while a drag
   // is live (guarded by `dragRef`). A drag captures the pointer to the root, so
   // these fire for the gesture's duration only — no window listeners kept for the
@@ -135,7 +150,11 @@ export function TimelineElement({
   const onPointerMove = (event: React.PointerEvent) => {
     const drag = dragRef.current
     if (!drag) return
-    const dt = (event.clientX - drag.startX) / pps
+    // Pointer coordinates are SCREEN pixels while `pps` is layout pixels per
+    // second — the element is positioned with `left: startTime * pps`. Under a
+    // scaled ancestor (a zoomed canvas, a `scale()` preview) the two differ by
+    // exactly that scale, and the clip would trim by the wrong amount of time.
+    const dt = (event.clientX - drag.startX) / (pps * elementScale())
     const next =
       drag.side === 'move'
         ? move(drag.origin, dt)
