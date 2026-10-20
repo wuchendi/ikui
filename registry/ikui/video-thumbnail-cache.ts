@@ -224,7 +224,7 @@ export class VideoThumbnailCache {
     const existing = this.posterUrls.get(key)
     if (existing) return Promise.resolve(existing)
     const pending = this.posterPending.get(key)
-    if (pending) return pending
+    if (pending !== undefined) return pending
     const next = this.buildPosterUrl(snapTime(time), key)
     this.posterPending.set(key, next)
     return next
