@@ -16,10 +16,16 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
+import { siteConfig } from '@/lib/config'
 import { allDocItems, getDoc, getDocSchema } from '@/lib/doc'
 import { getDocMarkdown } from '@/lib/llm'
 import { getTableOfContents } from '@/lib/toc'
-import { absoluteUrl, buildOgUrl, constructMetadata } from '@/lib/utils'
+import {
+  absoluteUrl,
+  buildOgUrl,
+  constructMetadata,
+  jsonLdScript,
+} from '@/lib/utils'
 
 export async function generateMetadata({
   params,
@@ -39,6 +45,10 @@ export async function generateMetadata({
     title: item.title,
     description: item.description,
     image,
+    alternates: {
+      canonical: absoluteUrl(`/docs/${id}`),
+      types: { 'text/markdown': absoluteUrl(`/docs/${id}.md`) },
+    },
     openGraph: {
       title: item.title,
       description: item.description,
@@ -99,8 +109,34 @@ export default async function DocPage({
   // public/docs/<id>.md), not the raw MDX with its wrapper components.
   const copyContent = await getDocMarkdown(id)
 
+  const url = absoluteUrl(`/docs/${id}`)
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: item.title,
+    description: item.description,
+    url,
+    mainEntityOfPage: url,
+    inLanguage: 'en',
+    author: {
+      '@type': 'Person',
+      name: siteConfig.author.name,
+      url: siteConfig.author.url,
+    },
+    isPartOf: {
+      '@type': 'WebSite',
+      name: siteConfig.name,
+      url: absoluteUrl('/'),
+    },
+  }
+
   return (
     <div className="container py-8 md:py-12">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: Required for JSON-LD structured data
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(articleJsonLd) }}
+      />
       <div className="xl:grid xl:grid-cols-[10px_1fr_200px] lg:grid-cols-[0px_1fr_200px] xl:gap-8 max-w-[1600px] mx-auto">
         <div className="hidden xl:block" />
         <article className="max-w-4xl prose dark:prose-invert w-full min-w-0">

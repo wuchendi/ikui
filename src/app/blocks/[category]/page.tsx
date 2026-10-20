@@ -33,6 +33,7 @@ export async function generateMetadata({
   if (!meta) return constructMetadata()
   return constructMetadata({
     title: `${meta.label} Blocks`,
+    path: `/blocks/${meta.slug}`,
     description: `${meta.label} business compositions built from the ikui primitives. Copy, paste, install.`,
   })
 }

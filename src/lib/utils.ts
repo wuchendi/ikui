@@ -14,16 +14,25 @@ export function buildOgUrl(params?: { title?: string; description?: string }) {
   return url.toString()
 }
 
+/** Serialize JSON-LD for an inline `<script>`, escaping `<` to block tag injection. */
+export function jsonLdScript(data: unknown) {
+  return JSON.stringify(data).replace(/</g, '\\u003c')
+}
+
 export function constructMetadata({
   title = siteConfig.name,
   description = siteConfig.description,
   image = absoluteUrl('/og'),
+  path,
   ...props
 }: {
   title?: string
   description?: string
   image?: string
+  /** Route path of the page; sets its canonical and og:url. Omit in layouts. */
+  path?: string
 } & Partial<Metadata> = {}): Metadata {
+  const url = path === undefined ? undefined : absoluteUrl(path)
   return {
     title,
     description,
@@ -48,7 +57,7 @@ export function constructMetadata({
       title,
       description,
       type: 'website',
-      url: siteConfig.url,
+      url,
       siteName: siteConfig.name,
       images: [
         {
@@ -68,6 +77,7 @@ export function constructMetadata({
     },
     metadataBase: new URL(siteConfig.url),
     icons: '/icon.svg',
+    ...(url && { alternates: { canonical: url } }),
     ...props,
   }
 }

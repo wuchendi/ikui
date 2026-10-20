@@ -3,7 +3,7 @@ import { cn } from 'cn'
 import type { Metadata, Viewport } from 'next'
 import { DynaPuff, Geist, Geist_Mono, Instrument_Serif } from 'next/font/google'
 import { siteConfig } from '@/lib/config'
-import { constructMetadata } from '@/lib/utils'
+import { constructMetadata, jsonLdScript } from '@/lib/utils'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 
@@ -79,10 +79,6 @@ const softwareJsonLd = {
   },
   inLanguage: 'en',
   isAccessibleForFree: true,
-}
-
-function jsonLdScript(data: unknown) {
-  return JSON.stringify(data).replace(/</g, '\\u003c')
 }
 
 export default async function RootLayout({
