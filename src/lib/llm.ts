@@ -13,11 +13,13 @@ import type { Registry } from './types'
 
 /** Marketing blurb shared by the `llms.txt` and `llms-full.txt` headers. */
 const SITE_DESCRIPTION =
-  'ikui is a curated collection of reusable React components, blocks, and ' +
-  'templates for building captivating landing pages and user-focused marketing ' +
-  'materials. Built with React, Tailwind CSS, and Motion, it draws heavy ' +
-  'inspiration from shadcn/ui with a magical twist. Components are copy-ready ' +
-  'and installable via the shadcn CLI.'
+  'ikui is a copy-paste React component library built on Base UI and ' +
+  'Tailwind CSS, distributed through a shadcn-style registry. It ships media ' +
+  'and timeline primitives (audio waveform and player, video thumbnail ' +
+  'strips, a zoom-aware timeline ruler / element / playhead, image compare ' +
+  'and crop), general components (data table, tree, cascader, charts, date ' +
+  'range picker), and ready-made blocks composed from them (audio and video ' +
+  'trimmers, media compressor, image cropper and editor).'
 
 /** Repository link surfaced in the `llms.txt` "Optional" section. */
 const GITHUB_URL = 'https://github.com/WuChenDi/ikui'
@@ -538,6 +540,21 @@ async function writeLlmsIndexFile(
     for (const item of components) {
       lines.push(
         `- [${item.title}](${base}/docs/${item.name}.md): ${item.description ?? ''}`,
+      )
+    }
+    lines.push('')
+  }
+
+  // Blocks have no docs page; link their registry item, which carries the
+  // description and full source.
+  const blocks = (registry?.items ?? []).filter(
+    (item) => item.type === 'registry:block',
+  )
+  if (blocks.length) {
+    lines.push('## Blocks', '')
+    for (const item of blocks) {
+      lines.push(
+        `- [${item.title}](${base}/r/${item.name}.json): ${item.description ?? ''}`,
       )
     }
     lines.push('')

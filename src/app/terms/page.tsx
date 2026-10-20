@@ -1,6 +1,12 @@
 import Link from 'next/link'
 import SiteHeader from '@/components/site-header'
 import { siteConfig } from '@/lib/config'
+import { constructMetadata } from '@/lib/utils'
+
+export const metadata = constructMetadata({
+  title: 'Terms of Service',
+  path: '/terms',
+})
 
 export default function TermsOfServicePage() {
   return (

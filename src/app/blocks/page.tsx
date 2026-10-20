@@ -10,6 +10,7 @@ import { constructMetadata } from '@/lib/utils'
 
 export const metadata = constructMetadata({
   title: 'Blocks',
+  path: '/blocks',
   description:
     'Ready-made business compositions built from the ikui primitives. Copy, paste, install.',
 })

@@ -22,6 +22,7 @@ export async function generateMetadata({
   if (!block) return constructMetadata()
   return constructMetadata({
     title: block.title,
+    path: `/blocks/view/${name}`,
     description: block.description,
   })
 }

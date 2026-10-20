@@ -5,6 +5,9 @@ import { ScrollStatement } from '@/components/scroll-statement'
 import { SiteFooter } from '@/components/site-footer'
 import SiteHeader from '@/components/site-header'
 import { getDocSchema } from '@/lib/doc'
+import { constructMetadata } from '@/lib/utils'
+
+export const metadata = constructMetadata({ path: '/' })
 
 const docSchema = await getDocSchema()
 
